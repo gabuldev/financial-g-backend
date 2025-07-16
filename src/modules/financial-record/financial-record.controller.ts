@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import { CreateFinancialRecordDto } from './dtos/create-financial-record.dto';
 import { FinancialRecordService } from './financial-record.service';
 
 @Controller('financial-record')
@@ -11,7 +12,7 @@ export class FinancialRecordController {
   }
 
   @Post()
-  create(@Body() body: any) {
+  create(@Body() body: CreateFinancialRecordDto) {
     return this.service.create(body);
   }
 }
