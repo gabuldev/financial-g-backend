@@ -6,7 +6,9 @@ import { FinancialRecordModule } from './modules/financial-record/financial-reco
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGODB_URI),
+    MongooseModule.forRoot(
+      'mongodb+srv://gabuldev:UcOtVN9P0DEcpv8p@finq.kgvuwxj.mongodb.net/production?retryWrites=true&w=majority&appName=Finq',
+    ),
     FinancialRecordModule,
   ],
   providers: [CacheService, MemoryCacheService],

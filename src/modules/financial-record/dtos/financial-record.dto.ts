@@ -1,17 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsDate,
-  IsEnum,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
 import { FinancialRecordType } from 'src/schemas/financial-record.schema';
 
-export class CreateFinancialRecordDto {
-  @IsString()
-  @IsNotEmpty()
+export class FinancialRecordDto {
   @ApiProperty({
     description: 'The name of the financial record',
     example: 'Salary',
@@ -20,18 +10,14 @@ export class CreateFinancialRecordDto {
   })
   name: string;
 
-  @IsString()
-  @IsOptional()
   @ApiProperty({
     description: 'The description of the financial record',
     example: 'Salary received from work',
     required: false,
     type: String,
   })
-  description?: string;
+  description: string;
 
-  @IsNumber()
-  @IsNotEmpty()
   @ApiProperty({
     description: 'The amount of the financial record',
     example: 1000,
@@ -40,23 +26,17 @@ export class CreateFinancialRecordDto {
   })
   amount: number;
 
-  @IsEnum(FinancialRecordType)
-  @IsNotEmpty()
   @ApiProperty({
-    description: 'The type of the financial record',
-    example: FinancialRecordType.INCOME,
+    enum: FinancialRecordType,
     required: true,
-    type: String,
   })
   type: FinancialRecordType;
 
-  @IsDate()
-  @IsOptional()
   @ApiProperty({
     description: 'The date of the financial record',
     example: '2021-01-01',
-    required: false,
+    required: true,
     type: Date,
   })
-  date?: Date;
+  date: Date;
 }
