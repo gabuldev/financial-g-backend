@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CacheService } from './cache/cache.service';
 import { MemoryCacheService } from './cache/memory-cache.service';
@@ -6,9 +7,10 @@ import { FinancialRecordModule } from './modules/financial-record/financial-reco
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://gabuldev:UcOtVN9P0DEcpv8p@finq.kgvuwxj.mongodb.net/production?retryWrites=true&w=majority&appName=Finq',
-    ),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    MongooseModule.forRoot(process.env.MONGODB_URI),
     FinancialRecordModule,
   ],
   providers: [CacheService, MemoryCacheService],
